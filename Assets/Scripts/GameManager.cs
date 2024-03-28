@@ -10,9 +10,12 @@ public class GameManager : MonoBehaviour
     //public AudioClip match;
     //public AudioSource audioSource;
 
+    public GameObject endTxt;
     public Text timeTxt;
     float time = 0;
-   
+
+    public int cardCount = 0;
+
     // public GameObject card;
 
     public static GameManager I;
@@ -80,8 +83,16 @@ public class GameManager : MonoBehaviour
             //     audioSource.PlayOneShot(match);
             firstCard.DestroyCard();
             secondCard.DestroyCard();
+            cardCount -= 2;
 
-         //   int cardsLeft = GameObject.Find("cards").transform.childCount;
+            if (cardCount == 0)
+            {
+                endTxt.SetActive(true);
+                Time.timeScale = 0.0f;
+            }
+
+
+            //   int cardsLeft = GameObject.Find("cards").transform.childCount;
 
             //if (cardsLeft == 2)
             //{
