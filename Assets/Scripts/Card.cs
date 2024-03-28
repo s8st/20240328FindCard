@@ -5,7 +5,12 @@ using UnityEngine;
 public class Card : MonoBehaviour
 {
     int idx = 0;
-    public SpriteRenderer front;
+    public SpriteRenderer frontImage;
+
+    public GameObject front;
+    public GameObject back;
+
+    public Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -24,8 +29,15 @@ public class Card : MonoBehaviour
         idx = number;
         
 
-    front.sprite = Resources.Load<Sprite>($"img{idx}");
+    frontImage.sprite = Resources.Load<Sprite>($"img{idx}");
     }
+    
 
+    public void OpenCard()
+    {
+        anim.SetBool("isOpen", true);
+        front.SetActive(true);
+        back.SetActive(false);
+    }
 
 }
