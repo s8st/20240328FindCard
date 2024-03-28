@@ -7,23 +7,31 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public AudioClip match;
-    public AudioSource audioSource;
+    //public AudioClip match;
+    //public AudioSource audioSource;
 
     public Text timeTxt;
     float time = 0;
-    public GameObject card;
+   
+    // public GameObject card;
 
     public static GameManager I;
 
-    public GameObject firstCard;
-    public GameObject secondCard;
+    //public GameObject firstCard;
+    //public GameObject secondCard;
 
-    public GameObject endTxt;
+    public Card firstCard;
+    public Card secondCard;
+
+
+    //public GameObject endTxt;
 
     void Awake()
     {
-        I = this;
+        if (I == null)
+        {
+            I = this;
+        }
     }
 
 
@@ -56,13 +64,47 @@ public class GameManager : MonoBehaviour
         time += Time.deltaTime;
         timeTxt.text = time.ToString("N2");
 
-        if (time > 3f)
+        //if (time > 3f)
+        //{
+        //    Time.timeScale = 0f;
+        //    endTxt.SetActive(true);
+
+        //}
+    }
+
+
+    public void Matched()
+    {
+        if (firstCard.idx == secondCard.idx)
         {
-            Time.timeScale = 0f;
-            endTxt.SetActive(true);
+            //     audioSource.PlayOneShot(match);
+            firstCard.DestroyCard();
+            secondCard.DestroyCard();
+
+         //   int cardsLeft = GameObject.Find("cards").transform.childCount;
+
+            //if (cardsLeft == 2)
+            //{
+
+            //    Time.timeScale = 0f;
+            //    //      endTxt.SetActive(true);
+            //    //  Invoke("GameEnd", 1f);
+            //}
+
 
         }
+        else
+        {
+            firstCard.CloseCard();
+            secondCard.CloseCard();
+
+        }
+
+        firstCard = null;
+        secondCard = null;
     }
+
+
 
     public void isMatched()
     {
@@ -71,7 +113,7 @@ public class GameManager : MonoBehaviour
 
         if (firstCardImage == secondCardImage)
         {
-            audioSource.PlayOneShot(match);
+       //     audioSource.PlayOneShot(match);
             //firstCard.GetComponent<card>().destroyCard();
             //secondCard.GetComponent<card>().destroyCard();
 
@@ -81,7 +123,7 @@ public class GameManager : MonoBehaviour
             {
 
                 Time.timeScale = 0f;
-                endTxt.SetActive(true);
+          //      endTxt.SetActive(true);
                 //  Invoke("GameEnd", 1f);
             }
 
@@ -102,7 +144,7 @@ public class GameManager : MonoBehaviour
     void GameEnd()
     {
         Time.timeScale = 0f;
-        endTxt.SetActive(true);
+   //   endTxt.SetActive(true);
     }
 
     public void RetryGame()
