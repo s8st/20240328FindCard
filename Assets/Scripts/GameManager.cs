@@ -67,12 +67,14 @@ public class GameManager : MonoBehaviour
         time += Time.deltaTime;
         timeTxt.text = time.ToString("N2");
 
-        //if (time > 3f)
-        //{
-        //    Time.timeScale = 0f;
-        //    endTxt.SetActive(true);
+        //  30초가 지나면 게임 끝내기
 
-        //}
+        if (time > 30f)
+        {
+            Time.timeScale = 0f;
+            endTxt.SetActive(true);
+
+        }
     }
 
 
